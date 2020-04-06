@@ -5,52 +5,44 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Row } from "react-bootstrap";
 
 
-// const API_KEY = process.env.REACT_APP_YAHOO_API_KEY;
+require("dotenv").config();
 
-// const accountSid = process.env.TWILIO_ACCOUNT_SID;
-// const authToken = process.env.TWILIO_AUTH_TOKEN;
+const accountSid = process.env.REACT_APP_SID;
+const authToken = process.env.REACT_APP_TOKEN;
+var twilio = require('twilio');
+const client = new twilio(accountSid, authToken);
+
+function call (){
 
 
+  
+  
+  client.calls
+        .create({
+           url: 'https://handler.twilio.com/twiml/EH34f76e7cba60708c9daa84db1b77a062',
+           to: '+14168469162',
+           from: '+13656571048'
+         })
+        .then(call => console.log(call.sid));
+  
+}
 
+function text(){
 
+  const msg='GOATS ATK!!'
 
+  client.messages
+      .create({
+              body: msg,
+              mediaUrl: ['https://i.ytimg.com/vi/qzEGlOIINso/maxresdefault.jpg'],
+              to: '+14164326584',
+              from: '+13656571048'
+      })
+      .then(message => console.log(message.sid));
+}
 
 
 function App() {
-
-
-
-  function call (){
-
-var twilio = require('twilio');
- 
-    const client = new twilio(accountSid, authToken);
-
-    
-    
-    console.log('calling')
-    console.log(accountSid)
-    console.log(authToken)
-    
-    
-    client.calls
-          .create({
-             url: 'http://demo.twilio.com/docs/voice.xml',
-             to: '+14164538894',
-             from: '+13656571048'
-           })
-          .then(call => console.log(call.sid));
-    
-  }
-
-
-
-
-
-
-
-
-
 
 
 
@@ -66,7 +58,7 @@ var twilio = require('twilio');
         CALL
         </Button>
 
-        <Button variant="contained" color="primary" onClick={()=> console.log(process.env.TWILIO_AUTH_TOKEN)}>
+        <Button variant="contained" color="primary" onClick={text}>
         TEXT
         </Button>
       </Row>
