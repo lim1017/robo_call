@@ -1,6 +1,5 @@
 import React from "react";
 import "./App.css";
-import Button from "@material-ui/core/Button";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Container, Row } from "react-bootstrap";
 import FormSettings from "./components/FormSettings/FormSettings.jsx";
@@ -17,7 +16,7 @@ function call(phone, msg) {
   client.calls
     .create({
       url:
-        "https://handler.twilio.com/twiml/EH34f76e7cba60708c9daa84db1b77a062",
+        `https://handler.twilio.com/twiml/EH34f76e7cba60708c9daa84db1b77a062?MSG=${msg}`,
       to: phone,
       from: "+13656571048",
     })
@@ -49,15 +48,7 @@ function App() {
       <FormSettings call={call} text={text} />
     </Row>
 
-      {/* <Row className="justify-content-md-center">
-        <Button variant="contained" color="primary" onClick={call}>
-          CALL
-        </Button>
-
-        <Button variant="contained" color="primary" onClick={text}>
-          TEXT
-        </Button>
-      </Row> */}
+    
     </Container>
   );
 }

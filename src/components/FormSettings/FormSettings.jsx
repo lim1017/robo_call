@@ -15,17 +15,14 @@ export default function FormSettings(props) {
 
 function handleChangePhone(event){
   setPhone(event.target.value);
-  console.log(phone)
 }
 
 const handleChangeMsg = event => {
   setMsg(event.target.value);
-  console.log(msg)
 };
 
 const handleChangeImg = event =>{
   setImg(event.target.value);
-  console.log(img)
 }
 
 
@@ -62,12 +59,12 @@ const handleChangeImg = event =>{
     
 
     <Row className="justify-content-md-center">
-        <Button variant="contained" color="primary" onClick={()=>props.call(phone, msg)}>
+        <Button style={{marginRight:'1em'}} variant="contained" color="primary" onClick={()=>props.call(phone, msg)}>
           CALL
         </Button>
 
-        <Button variant="contained" color="primary" onClick={()=>props.text(phone, msg, img)}>
-          TEXT
+        <Button style={{marginLeft:'1em'}} variant="contained" color="primary" onClick={()=>props.text(phone, msg, img)}>
+          PICTURE TEXT
         </Button>
     </Row>
 
