@@ -15,7 +15,7 @@ const client = new twilio(accountSid, authToken);
 
 function call(phone, msg, audio) {
 
-  //cant sent spaces in https requests
+  //cant sent spaces in https requests so replace spaces with +
   const newMsg = msg.replace(/ /g, "+");
 
 
