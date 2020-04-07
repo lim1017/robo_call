@@ -12,11 +12,30 @@ const authToken = process.env.REACT_APP_TOKEN;
 var twilio = require("twilio");
 const client = new twilio(accountSid, authToken);
 
-function call(phone, msg) {
+
+function call(phone, msg, audio) {
+
+  console.log(audio)
+  let song=''
+
+  if (audio ==="Rick Roll"){
+    song='http://demo.twilio.com/docs/classic.mp3'
+  }
+
+  if (audio ==="Barrel"){
+    song='https://melon-zebra-7147.twil.io/assets/BARRELROLL.mp3'
+  }
+
+  if (audio ==="Just Do It"){
+    song='https://melon-zebra-7147.twil.io/assets/DOIT.mp3'
+  }
+
+  console.log(song)
+
   client.calls
     .create({
       url:
-        `https://handler.twilio.com/twiml/EH34f76e7cba60708c9daa84db1b77a062?MSG=${msg}`,
+        `https://handler.twilio.com/twiml/EH34f76e7cba60708c9daa84db1b77a062?MSG=${msg}&song=${song}`,
       to: phone,
       from: "+13656571048",
     })
@@ -25,7 +44,6 @@ function call(phone, msg) {
 
 function text(phone, msg, img) {
 
-  console.log(img)
 
   client.messages
     .create({
