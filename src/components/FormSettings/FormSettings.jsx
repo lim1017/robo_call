@@ -97,7 +97,7 @@ const handleChangeAudio = event =>{
   return (
   <Form>
     <Form.Group controlId="formBasicEmail">
-      <Form.Label>Phone #</Form.Label>
+      <Form.Label>Phone # (Include country code CAN/US=1)</Form.Label>
       
       <Form.Control type="phonw" placeholder="Enter Phone #" onChange={handleChangePhone}
       />
@@ -119,7 +119,7 @@ const handleChangeAudio = event =>{
 <Row>
     
     <FormControl className={classes.formControl}>
-        <InputLabel id="demo-simple-select-label">Audio</InputLabel>
+        <InputLabel id="demo-simple-select-label">Audio: Call Only</InputLabel>
         <Select
           labelId="demo-simple-select-label"
           id="demo-simple-select"
@@ -152,8 +152,8 @@ const handleChangeAudio = event =>{
     
     
     
-    <Form.Group controlId="formBasicPassword">
-      <Form.Label>Img for Text only</Form.Label>
+    <Form.Group style={{marginLeft:'3em'}} controlId="formBasicPassword">
+      <Form.Label>Image: Text only</Form.Label>
       <Form.Control type="url" placeholder="Img Url"
       onChange={handleChangeImg}
       />
@@ -165,11 +165,11 @@ const handleChangeAudio = event =>{
 
 
     <Row className="justify-content-md-center">
-        <Button style={{marginRight:'1em'}} variant="contained" color="primary" onClick={()=>props.call(phone, msg, audio)}>
+        <Button style={{marginRight:'3em'}} variant="contained" color="primary" onClick={()=>props.call(phone, msg, audio)}>
           CALL
         </Button>
 
-        <Button style={{marginLeft:'1em'}} variant="contained" color="primary" onClick={()=>props.text(phone, msg, img)}>
+        <Button style={{marginLeft:'3em'}} variant="contained" color="primary" onClick={()=>props.text(phone, msg, img)}>
           PICTURE TEXT
         </Button>
     </Row>
