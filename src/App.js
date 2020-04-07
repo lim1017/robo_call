@@ -15,7 +15,10 @@ const client = new twilio(accountSid, authToken);
 
 function call(phone, msg, audio) {
 
-  console.log(audio)
+  //cant sent spaces in https requests
+  const newMsg = msg.replace(/ /g, "+");
+
+
   let song=''
 
   if (audio ==="Rick Roll"){
@@ -30,12 +33,11 @@ function call(phone, msg, audio) {
     song='https://melon-zebra-7147.twil.io/assets/DOIT.mp3'
   }
 
-  console.log(song)
 
   client.calls
     .create({
       url:
-        `https://handler.twilio.com/twiml/EH34f76e7cba60708c9daa84db1b77a062?MSG=${msg}&song=${song}`,
+        `https://handler.twilio.com/twiml/EH34f76e7cba60708c9daa84db1b77a062?MSG=${newMsg}&song=${song}`,
       to: phone,
       from: "+13656571048",
     })
@@ -43,7 +45,6 @@ function call(phone, msg, audio) {
 }
 
 function text(phone, msg, img) {
-
 
   client.messages
     .create({
