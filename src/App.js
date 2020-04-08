@@ -1,8 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Container, Row } from "react-bootstrap";
 import FormSettings from "./components/FormSettings/FormSettings.jsx";
+
+
+import Modalz from "./components/Modal/Modal.jsx";
+
+
 
 
 require("dotenv").config();
@@ -56,7 +61,21 @@ function text(phone, msg, img) {
     .then((message) => console.log(message.sid));
 }
 
+
+
+
+
 function App() {
+
+
+  const [modalShow, setModalShow] = React.useState(false);
+
+function toggleModel(){
+  console.log('clicked')
+  setModalShow(true)
+}
+
+
   return (
     <Container>
       <Row className="justify-content-md-center">
@@ -64,10 +83,15 @@ function App() {
       </Row>
 
     <Row className="justify-content-md-center">
-      <FormSettings call={call} text={text} />
+      <FormSettings call={call} text={text} toggleModel={toggleModel} />
     </Row>
 
     
+    <Modalz 
+      show={modalShow}
+      onHide={() => setModalShow(false)}
+    />
+
     </Container>
   );
 }

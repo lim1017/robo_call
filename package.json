@@ -2,9 +2,7 @@
   "name": "mrobo-call",
   "version": "0.1.0",
   "private": true,
-    
   "homepage": ".",
-    
   "dependencies": {
     "@material-ui/core": "^4.9.9",
     "@testing-library/jest-dom": "^4.2.4",
@@ -14,6 +12,7 @@
     "react": "^16.13.1",
     "react-bootstrap": "^1.0.0",
     "react-dom": "^16.13.1",
+    "react-paypal-button-v2": "^2.6.1",
     "react-scripts": "3.4.1",
     "twilio": "^3.42.0"
   },

@@ -14,6 +14,9 @@ import NativeSelect from '@material-ui/core/NativeSelect';
 import InputBase from '@material-ui/core/InputBase';
 
 
+
+
+
 const BootstrapInput = withStyles((theme) => ({
   root: {
     'label + &': {
@@ -76,6 +79,8 @@ export default function FormSettings(props) {
 
 
 
+
+
 function handleChangePhone(event){
   setPhone(event.target.value);
 }
@@ -95,6 +100,7 @@ const handleChangeAudio = event =>{
 
 
   return (
+    <>
   <Form>
     <Form.Group controlId="formBasicEmail">
       <Form.Label>Phone # (Include country code CAN/US=1)</Form.Label>
@@ -169,14 +175,20 @@ const handleChangeAudio = event =>{
           CALL
         </Button>
 
-        <Button style={{marginLeft:'3em'}} variant="contained" color="primary" onClick={()=>props.text(phone, msg, img)}>
+        <Button style={{marginLeft:'3em'}} variant="contained" color="primary" 
+        onClick={()=>props.toggleModel()}
+        >
           PICTURE TEXT
         </Button>
     </Row>
 
   </Form>
 
+</>
   )
 }
 
 // export default FormSettings
+
+
+        // onClick={()=>props.text(phone, msg, img)}
