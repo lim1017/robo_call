@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, createRef } from "react";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Container, Row } from "react-bootstrap";
@@ -71,9 +71,10 @@ function App() {
   const [modalShow, setModalShow] = React.useState(false);
 
 function toggleModel(){
-  console.log('clicked')
   setModalShow(true)
 }
+
+let pay = createRef();
 
 
   return (
@@ -90,6 +91,7 @@ function toggleModel(){
     <Modalz 
       show={modalShow}
       onHide={() => setModalShow(false)}
+      
     />
 
     </Container>
