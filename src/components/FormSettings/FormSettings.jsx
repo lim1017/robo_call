@@ -152,7 +152,7 @@ export default function FormSettings(props) {
         </Button>
 
         <Button style={{marginLeft:'3em'}} variant="contained" color="primary" 
-        onClick={()=>props.toggleModel()}
+        onClick={()=>props.toggleModel2()}
         >
           PICTURE TEXT
         </Button>

@@ -4,9 +4,9 @@ import Button from "@material-ui/core/Button";
 import { PayPalButton } from "react-paypal-button-v2";
 
 
-export default function Modalz(props) {
+export default function Modalz2(props) {
 
-  const {audio, phone, img, msg, call ,toggleModel, onHide} = props
+  const {audio, phone, img, msg, text ,toggleModel2, onHide} = props
 
   return (
     <Modal
@@ -17,7 +17,7 @@ export default function Modalz(props) {
     >
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
-          Robo Call 
+          Robo Text 
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
@@ -32,9 +32,9 @@ export default function Modalz(props) {
         onSuccess={(details, data) => {
           alert("Transaction completed by Press ok to complete the action " + details.payer.name.given_name);
           
-          toggleModel()
+          toggleModel2()
 
-          call(phone, msg, audio)
+          text(phone, msg, img)
  
           
         }}

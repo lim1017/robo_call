@@ -6,6 +6,8 @@ import FormSettings from "./components/FormSettings/FormSettings.jsx";
 
 
 import Modalz from "./components/Modal/Modal.jsx";
+import Modalz2 from "./components/Modal/Modal2.jsx";
+
 
 
 
@@ -70,10 +72,17 @@ function App() {
 
 const [modalShow, setModalShow] = React.useState(false);
 
+const [modalShow2, setModalShow2] = React.useState(false);
+
+
 function toggleModel(){
   setModalShow(!modalShow)
 }
 
+
+function toggleModel2(){
+  setModalShow2(!modalShow)
+}
 
 const [phone, setPhone] = React.useState("");
 const [msg, setMsg] = React.useState("");
@@ -107,6 +116,7 @@ console.log(audio)
 
     <Row className="justify-content-md-center">
       <FormSettings call={call} text={text} toggleModel={toggleModel}
+      toggleModel2={toggleModel2}
       handleChangePhone={handleChangePhone}
       handleChangeMsg={handleChangeMsg}
       handleChangeImg={handleChangeImg}
@@ -125,6 +135,17 @@ console.log(audio)
       msg={msg}
       call={call}
       toggleModel={toggleModel}
+    />
+
+    <Modalz2 
+      show={modalShow2}
+      onHide={() => setModalShow(false)}
+      audio={audio}
+      phone={phone}
+      img={img}
+      msg={msg}
+      text={text}
+      toggleModel2={toggleModel2}
     />
 
     </Container>
