@@ -71,32 +71,8 @@ const useStyles = makeStyles((theme) => ({
 export default function FormSettings(props) {
 
 
-  const [phone, setPhone] = React.useState("");
-  const [msg, setMsg] = React.useState("");
-  const [img, setImg] = React.useState("");
   const classes = useStyles();
-  const [audio, setAudio] = React.useState('');
 
-
-
-
-
-function handleChangePhone(event){
-  setPhone(event.target.value);
-}
-
-const handleChangeMsg = event => {
-  setMsg(event.target.value);
-};
-
-const handleChangeImg = event =>{
-  setImg(event.target.value);
-}
-
-const handleChangeAudio = event =>{
-  setAudio(event.target.value);
-  console.log(audio)
-}
 
 
   return (
@@ -105,7 +81,7 @@ const handleChangeAudio = event =>{
     <Form.Group controlId="formBasicEmail">
       <Form.Label>Phone # (Include country code CAN/US=1)</Form.Label>
       
-      <Form.Control type="phonw" placeholder="Enter Phone #" onChange={handleChangePhone}
+      <Form.Control type="phonw" placeholder="Enter Phone #" onChange={props.handleChangePhone}
       />
 
       <Form.Text className="text-muted">
@@ -117,7 +93,7 @@ const handleChangeAudio = event =>{
     <Form.Group controlId="formBasicPassword">
       <Form.Label>Message</Form.Label>
       <Form.Control type="message" placeholder="Message"
-      onChange={handleChangeMsg}
+      onChange={props.handleChangeMsg}
       />
     </Form.Group>
     
@@ -129,8 +105,8 @@ const handleChangeAudio = event =>{
         <Select
           labelId="demo-simple-select-label"
           id="demo-simple-select"
-          value={audio}
-          onChange={handleChangeAudio}
+          value={props.audio}
+          onChange={props.handleChangeAudio}
           defaultValue='Rick Roll'
         >
           <MenuItem value='Rick Roll'>Rick Roll</MenuItem>
@@ -161,7 +137,7 @@ const handleChangeAudio = event =>{
     <Form.Group style={{marginLeft:'3em'}} controlId="formBasicPassword">
       <Form.Label>Image: Text only</Form.Label>
       <Form.Control type="url" placeholder="Img Url"
-      onChange={handleChangeImg}
+      onChange={props.handleChangeImg}
       />
     </Form.Group>
 
@@ -171,7 +147,7 @@ const handleChangeAudio = event =>{
 
 
     <Row className="justify-content-md-center">
-        <Button style={{marginRight:'3em'}} variant="contained" color="primary" onClick={()=>props.call(phone, msg, audio)}>
+        <Button style={{marginRight:'3em'}} variant="contained" color="primary" onClick={()=>props.toggleModel()}>
           CALL
         </Button>
 
@@ -190,5 +166,5 @@ const handleChangeAudio = event =>{
 
 // export default FormSettings
 
-
+        //props.call(phone, msg, audio)
         // onClick={()=>props.text(phone, msg, img)}

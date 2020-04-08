@@ -6,6 +6,7 @@ import { PayPalButton } from "react-paypal-button-v2";
 
 export default function Modalz(props) {
 
+  const {audio, phone, img, msg, call ,toggleModel, onHide} = props
 
   return (
     <Modal
@@ -29,14 +30,18 @@ export default function Modalz(props) {
         amount="0.10"
         // shippingPreference="NO_SHIPPING" // default is "GET_FROM_FILE"
         onSuccess={(details, data) => {
-          alert("Transaction completed by " + details.payer.name.given_name);
+          alert("Transaction completed by Press ok to complete the action " + details.payer.name.given_name);
+          
+          toggleModel()
+
+          call(phone, msg, audio)
  
           
         }}
       />
       </Modal.Body>
       <Modal.Footer>
-        <Button onClick={props.onHide}>Close</Button>
+        <Button onClick={onHide}>Close</Button>
       </Modal.Footer>
     </Modal>
   );

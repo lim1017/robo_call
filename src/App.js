@@ -68,13 +68,35 @@ function text(phone, msg, img) {
 function App() {
 
 
-  const [modalShow, setModalShow] = React.useState(false);
+const [modalShow, setModalShow] = React.useState(false);
 
 function toggleModel(){
-  setModalShow(true)
+  setModalShow(!modalShow)
 }
 
-let pay = createRef();
+
+const [phone, setPhone] = React.useState("");
+const [msg, setMsg] = React.useState("");
+const [img, setImg] = React.useState("");
+const [audio, setAudio] = React.useState('');
+
+function handleChangePhone(event){
+setPhone(event.target.value);
+}
+
+const handleChangeMsg = event => {
+setMsg(event.target.value);
+};
+
+const handleChangeImg = event =>{
+setImg(event.target.value);
+}
+
+const handleChangeAudio = event =>{
+setAudio(event.target.value);
+console.log(audio)
+}
+
 
 
   return (
@@ -84,14 +106,25 @@ let pay = createRef();
       </Row>
 
     <Row className="justify-content-md-center">
-      <FormSettings call={call} text={text} toggleModel={toggleModel} />
+      <FormSettings call={call} text={text} toggleModel={toggleModel}
+      handleChangePhone={handleChangePhone}
+      handleChangeMsg={handleChangeMsg}
+      handleChangeImg={handleChangeImg}
+      handleChangeAudio={handleChangeAudio}
+      audio={audio}
+      />
     </Row>
 
     
     <Modalz 
       show={modalShow}
       onHide={() => setModalShow(false)}
-      
+      audio={audio}
+      phone={phone}
+      img={img}
+      msg={msg}
+      call={call}
+      toggleModel={toggleModel}
     />
 
     </Container>
