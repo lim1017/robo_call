@@ -91,7 +91,7 @@ export default function FormSettings(props) {
 
 
     <Form.Group controlId="formBasicPassword">
-      <Form.Label>Message</Form.Label>
+      <Form.Label>Message (Don't Leave this Blank)</Form.Label>
       <Form.Control type="message" placeholder="Message"
       onChange={props.handleChangeMsg}
       />
@@ -135,7 +135,7 @@ export default function FormSettings(props) {
     
     
     <Form.Group style={{marginLeft:'3em'}} controlId="formBasicPassword">
-      <Form.Label>Image: Text only</Form.Label>
+      <Form.Label>Image: Text only (Copy image address)</Form.Label>
       <Form.Control type="url" placeholder="Img Url"
       onChange={props.handleChangeImg}
       />
