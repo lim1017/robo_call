@@ -139,7 +139,7 @@ console.log(audio)
 
     <Modalz2 
       show={modalShow2}
-      onHide={() => setModalShow(false)}
+      onHide={() => setModalShow2(false)}
       audio={audio}
       phone={phone}
       img={img}

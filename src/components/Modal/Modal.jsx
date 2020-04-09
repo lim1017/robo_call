@@ -21,13 +21,14 @@ export default function Modalz(props) {
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <h4>Only $0.10</h4>
+        <h4>Only $0.44</h4>
         <p>
-        I Promise its not a scam, it would cost more if it was.
+        I Promise its not a scam, Paypal takes $0.30, THATS the scam.
         </p>
 
         <PayPalButton
-        amount="0.10"
+        amount="0.44"
+        currency="CAD"
         // shippingPreference="NO_SHIPPING" // default is "GET_FROM_FILE"
         onSuccess={(details, data) => {
           alert("Transaction completed by Press ok to complete the action " + details.payer.name.given_name);
