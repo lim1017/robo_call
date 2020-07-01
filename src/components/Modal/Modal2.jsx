@@ -21,31 +21,8 @@ export default function Modalz2(props) {
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <h4>Only $0.44</h4>
-        <p>
-        I Promise its not a scam, Paypal takes $0.30 THATS the scam.
-        </p>
-
-        <PayPalButton
-        amount="0.44"
+        <h4>Success</h4>
         
-        // shippingPreference="NO_SHIPPING" // default is "GET_FROM_FILE"
-        onSuccess={(details, data) => {
-
-          alert("Thank you for paying me. Press ok to complete the action " + details.payer.name.given_name);
-          
-          toggleModel2()
-
-          text(phone, msg, img)
- 
-          
-        }}
-        options={{
-          currency:"CAD",
-          clientId: "AYSYFZqs42lQV42qC3oKEtHr3Y4PaVwBwGqfXfBGNH1KVkw4fMqdOBPLEZwGnfXCi9GYJvjuybaEaSbQ"
-        }}
-
-        />
       </Modal.Body>
       <Modal.Footer>
         <Button onClick={onHide}>Close</Button>

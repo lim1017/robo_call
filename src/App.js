@@ -4,13 +4,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Container, Row } from "react-bootstrap";
 import FormSettings from "./components/FormSettings/FormSettings.jsx";
 
-
 import Modalz from "./components/Modal/Modal.jsx";
 import Modalz2 from "./components/Modal/Modal2.jsx";
-
-
-
-
 
 require("dotenv").config();
 
@@ -20,93 +15,113 @@ var twilio = require("twilio");
 const client = new twilio(accountSid, authToken);
 
 
-function call(phone, msg, audio) {
+function App() {
+  const [modalShow, setModalShow] = React.useState(false);
 
+  const [modalShow2, setModalShow2] = React.useState(false);
+
+  function toggleModel() {
+    setModalShow(!modalShow);
+  }
+
+  function toggleModel2() {
+    setModalShow2(!modalShow);
+  }
+
+  const [phone, setPhone] = React.useState("");
+  const [msg, setMsg] = React.useState("");
+  const [img, setImg] = React.useState("");
+  const [audio, setAudio] = React.useState("");
+
+  function handleChangePhone(event) {
+    setPhone(event.target.value);
+  }
+
+  const handleChangeMsg = (event) => {
+    setMsg(event.target.value);
+  };
+
+  const handleChangeImg = (event) => {
+    setImg(event.target.value);
+  };
+
+  const handleChangeAudio = (event) => {
+    setAudio(event.target.value);
+    console.log(audio);
+  };
+
+  const makeText = () =>{
+    console.log("here")
+    text(phone, msg, img)
+  }
+
+  const makeCall = () =>{
+    text(phone, msg, img)
+  }
+
+  const clearFields=()=>{
+    setPhone("")
+    setMsg("")
+    setImg("")
+    setAudio("")
+  }
+
+
+function call(phone, msg, audio) {
   //cant sent spaces in https requests so replace spaces with +
   const newMsg = msg.replace(/ /g, "+");
 
+  let song = "";
 
-  let song=''
-
-  if (audio ==="Rick Roll"){
-    song='http://demo.twilio.com/docs/classic.mp3'
+  if (audio === "Rick Roll") {
+    song = "http://demo.twilio.com/docs/classic.mp3";
   }
 
-  if (audio ==="Barrel"){
-    song='https://melon-zebra-7147.twil.io/assets/BARRELROLL.mp3'
+  if (audio === "Barrel") {
+    song = "https://melon-zebra-7147.twil.io/assets/BARRELROLL.mp3";
   }
 
-  if (audio ==="Just Do It"){
-    song='https://melon-zebra-7147.twil.io/assets/DOIT.mp3'
+  if (audio === "Just Do It") {
+    song = "https://melon-zebra-7147.twil.io/assets/DOIT.mp3";
   }
-
 
   client.calls
     .create({
-      url:
-        `https://handler.twilio.com/twiml/EH34f76e7cba60708c9daa84db1b77a062?MSG=${newMsg}&song=${song}`,
+      url: `https://handler.twilio.com/twiml/EH34f76e7cba60708c9daa84db1b77a062?MSG=${newMsg}&song=${song}`,
       to: phone,
-      from: "+13656571048",
+      from: "+12269185064",
     })
     .then((call) => console.log(call.sid));
 }
 
 function text(phone, msg, img) {
 
+  if (img == ""){
+    img = "https://dcist.com/wp-content/uploads/sites/3/2020/02/wilford_newsletter.jpg"
+  }
+
+  if (msg == ""){
+    msg="Hello from a friend!"
+  }
+
   client.messages
     .create({
       body: msg,
-      mediaUrl: [img],
+      mediaUrl: img,
       to: phone,
-      from: "+13656571048",
+      from: '+12269185064'
     })
-    .then((message) => console.log(message.sid));
+    .then((message) =>{
+      console.log(message.sid)
+      toggleModel2()
+      clearFields()
+    })
+    .catch(err=>{
+      console.log(err)
+      alert("Error check phone number");
+
+    })
 }
-
-
-
-
-
-function App() {
-
-
-const [modalShow, setModalShow] = React.useState(false);
-
-const [modalShow2, setModalShow2] = React.useState(false);
-
-
-function toggleModel(){
-  setModalShow(!modalShow)
-}
-
-
-function toggleModel2(){
-  setModalShow2(!modalShow)
-}
-
-const [phone, setPhone] = React.useState("");
-const [msg, setMsg] = React.useState("");
-const [img, setImg] = React.useState("");
-const [audio, setAudio] = React.useState('');
-
-function handleChangePhone(event){
-setPhone(event.target.value);
-}
-
-const handleChangeMsg = event => {
-setMsg(event.target.value);
-};
-
-const handleChangeImg = event =>{
-setImg(event.target.value);
-}
-
-const handleChangeAudio = event =>{
-setAudio(event.target.value);
-console.log(audio)
-}
-
-
 
   return (
     <Container>
@@ -114,40 +129,46 @@ console.log(audio)
         <h1>ROBO CALL Prank Your Friends! (No Refunds)</h1>
       </Row>
 
-    <Row className="justify-content-md-center">
-      <FormSettings call={call} text={text} toggleModel={toggleModel}
-      toggleModel2={toggleModel2}
-      handleChangePhone={handleChangePhone}
-      handleChangeMsg={handleChangeMsg}
-      handleChangeImg={handleChangeImg}
-      handleChangeAudio={handleChangeAudio}
-      audio={audio}
+      <Row className="justify-content-md-center">
+        <FormSettings
+          call={call}
+          text={text}
+          toggleModel={toggleModel}
+          toggleModel2={toggleModel2}
+          handleChangePhone={handleChangePhone}
+          handleChangeMsg={handleChangeMsg}
+          handleChangeImg={handleChangeImg}
+          handleChangeAudio={handleChangeAudio}
+          makeText={makeText}
+          makeCall={makeCall}
+          audio={audio}
+          phone={phone}
+          msg={msg}
+          img={img}
+        />
+      </Row>
+
+      <Modalz
+        show={modalShow}
+        onHide={() => setModalShow(false)}
+        audio={audio}
+        phone={phone}
+        img={img}
+        msg={msg}
+        call={call}
+        toggleModel={toggleModel}
       />
-    </Row>
 
-    
-    <Modalz 
-      show={modalShow}
-      onHide={() => setModalShow(false)}
-      audio={audio}
-      phone={phone}
-      img={img}
-      msg={msg}
-      call={call}
-      toggleModel={toggleModel}
-    />
-
-    <Modalz2 
-      show={modalShow2}
-      onHide={() => setModalShow2(false)}
-      audio={audio}
-      phone={phone}
-      img={img}
-      msg={msg}
-      text={text}
-      toggleModel2={toggleModel2}
-    />
-
+      <Modalz2
+        show={modalShow2}
+        onHide={() => setModalShow2(false)}
+        audio={audio}
+        phone={phone}
+        img={img}
+        msg={msg}
+        text={text}
+        toggleModel2={toggleModel2}
+      />
     </Container>
   );
 }
