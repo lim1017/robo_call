@@ -20,7 +20,7 @@ function App() {
 
   const [modalShow2, setModalShow2] = React.useState(false);
 
-  function toggleModel() {
+  function toggleModel1() {
     setModalShow(!modalShow);
   }
 
@@ -91,7 +91,16 @@ function call(phone, msg, audio) {
       to: phone,
       from: "+12269185064",
     })
-    .then((call) => console.log(call.sid));
+    .then((message) =>{
+      console.log(message.sid)
+      toggleModel1()
+      clearFields()
+    })
+    .catch(err=>{
+      console.log(err)
+      alert("Error check phone number");
+
+    })
 }
 
 function text(phone, msg, img) {
@@ -126,14 +135,14 @@ function text(phone, msg, img) {
   return (
     <Container>
       <Row className="justify-content-md-center">
-        <h1>ROBO CALL Prank Your Friends! (No Refunds)</h1>
+        <h1>ROBO CALL Prank Your Friends! (Donations are final)</h1>
       </Row>
 
       <Row className="justify-content-md-center">
         <FormSettings
           call={call}
           text={text}
-          toggleModel={toggleModel}
+          toggleModel1={toggleModel1}
           toggleModel2={toggleModel2}
           handleChangePhone={handleChangePhone}
           handleChangeMsg={handleChangeMsg}
@@ -156,7 +165,7 @@ function text(phone, msg, img) {
         img={img}
         msg={msg}
         call={call}
-        toggleModel={toggleModel}
+        toggleModel1={toggleModel1}
       />
 
       <Modalz2

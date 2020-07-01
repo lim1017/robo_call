@@ -4,9 +4,9 @@ import Button from "@material-ui/core/Button";
 import { PayPalButton } from "react-paypal-button-v2";
 
 
-export default function Modalz(props) {
+export default function Modalz2(props) {
 
-  const {audio, phone, img, msg, call ,toggleModel, onHide} = props
+  const {audio, phone, img, msg, text ,toggleModel2, onHide} = props
 
   return (
     <Modal
@@ -21,25 +21,8 @@ export default function Modalz(props) {
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <h4>Only $0.44</h4>
-        <p>
-        I Promise its not a scam, Paypal takes $0.30, THATS the scam.
-        </p>
-
-        <PayPalButton
-        amount="0.44"
-        currency="CAD"
-        // shippingPreference="NO_SHIPPING" // default is "GET_FROM_FILE"
-        onSuccess={(details, data) => {
-          alert("Transaction completed by Press ok to complete the action " + details.payer.name.given_name);
-          
-          toggleModel()
-
-          call(phone, msg, audio)
- 
-          
-        }}
-      />
+        <h4>Success!</h4>
+        
       </Modal.Body>
       <Modal.Footer>
         <Button onClick={onHide}>Close</Button>
