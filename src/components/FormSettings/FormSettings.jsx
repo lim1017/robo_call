@@ -11,11 +11,13 @@ import Select from "@material-ui/core/Select";
 
 import NativeSelect from "@material-ui/core/NativeSelect";
 import InputBase from "@material-ui/core/InputBase";
+import "./FormSettings.css";
+
 
 const BootstrapInput = withStyles((theme) => ({
   root: {
     "label + &": {
-      marginTop: theme.spacing(3),
+      // marginTop: theme.spacing(3),
     },
   },
   input: {
@@ -49,7 +51,7 @@ const BootstrapInput = withStyles((theme) => ({
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
-    margin: theme.spacing(1),
+    // margin: theme.spacing(1),
     minWidth: 120,
   },
   selectEmpty: {
@@ -73,59 +75,50 @@ export default function FormSettings(props) {
             onChange={props.handleChangePhone}
           />
 
-          <Form.Text className="text-muted">enter phone</Form.Text>
         </Form.Group>
 
         <Form.Group controlId="formBasicPassword">
           <Form.Label>Message</Form.Label>
           <Form.Control
             type="message"
-            placeholder="Hello, from a friend"
+            placeholder="Default: Hello, from a friend"
             value={props.msg}
             onChange={props.handleChangeMsg}
           />
         </Form.Group>
 
-        <Row>
+        <Row className="imgAudio">
           <FormControl className={classes.formControl}>
-            <InputLabel id="demo-simple-select-label">
+            {/* <InputLabel id="demo-customized-select-label">
               Audio: Call Only
-            </InputLabel>
+            </InputLabel> */}
+            <Form.Label>Audio Clip</Form.Label>
+
             <Select
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
+              labelId="demo-customized-select-label"
+              id="demo-customized-select"
               value={props.audio}
               onChange={props.handleChangeAudio}
               defaultValue="Rick Roll"
+              input={<BootstrapInput />}
+
             >
               <MenuItem value="Rick Roll">Rick Roll</MenuItem>
               <MenuItem value="Barrel">Do a Barrel Roll</MenuItem>
               <MenuItem value="Just Do It">Just Do It</MenuItem>
             </Select>
 
-            {/* <InputLabel htmlFor="demo-customized-select-native"></InputLabel>
-        
-        <NativeSelect
-          id="demo-customized-select-native"
-          value={audio}
-          onChange={handleChangeAudio}
-          input={<  BootstrapInput />}
-        >
-          <option aria-label="None" value="" />
-          <option value={10}>Rick Roll</option>
-          <option value={20}>Do A Barrel Roll</option>
-          <option value={30}>Just Do It!</option>
-        </NativeSelect> */}
+  
           </FormControl>
 
           <Form.Group
             style={{ marginLeft: "3em" }}
             controlId="formBasicPassword"
           >
-            <Form.Label>Image URL (Copy image address)</Form.Label>
+            <Form.Label>Image URL</Form.Label>
             <Form.Control
               type="url"
-              placeholder="Default = Random Fat Cat Image"
+              placeholder="Default: Random Cat Img"
               onChange={props.handleChangeImg}
               value={props.img}
             />
