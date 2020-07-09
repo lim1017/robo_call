@@ -7,7 +7,7 @@ import FormSettings from "./components/FormSettings/FormSettings.jsx";
 import Modalz from "./components/Modal/Modal.jsx";
 import Modalz2 from "./components/Modal/Modal2.jsx";
 
-require("dotenv").config();
+// require("dotenv").config();
 
 const accountSid = process.env.REACT_APP_SID;
 const authToken = process.env.REACT_APP_TOKEN;
