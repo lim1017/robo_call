@@ -11,8 +11,9 @@ require("dotenv").config();
 
 const accountSid = process.env.REACT_APP_SID;
 const authToken = process.env.REACT_APP_TOKEN;
-var twilio = require("twilio");
-const client = new twilio(accountSid, authToken);
+// var twilio = require("twilio");
+// const client = new twilio(accountSid, authToken);
+const client = require('twilio')(accountSid, authToken);
 
 
 function App() {
@@ -102,7 +103,7 @@ function call(phone, msg, audio) {
     })
     .catch(err=>{
       console.log(err)
-      alert("Error check phone number");
+      alert(err);
 
     })
 }
@@ -131,7 +132,7 @@ function text(phone, msg, img) {
     })
     .catch(err=>{
       console.log(err)
-      alert("Error check phone number");
+      alert(err);
 
     })
 }
