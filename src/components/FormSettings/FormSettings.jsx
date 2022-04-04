@@ -13,7 +13,6 @@ import NativeSelect from "@material-ui/core/NativeSelect";
 import InputBase from "@material-ui/core/InputBase";
 import "./FormSettings.css";
 
-
 const BootstrapInput = withStyles((theme) => ({
   root: {
     "label + &": {
@@ -74,7 +73,6 @@ export default function FormSettings(props) {
             value={props.phone}
             onChange={props.handleChangePhone}
           />
-
         </Form.Group>
 
         <Form.Group controlId="formBasicPassword">
@@ -101,14 +99,11 @@ export default function FormSettings(props) {
               onChange={props.handleChangeAudio}
               defaultValue="Rick Roll"
               input={<BootstrapInput />}
-
             >
               <MenuItem value="Rick Roll">Rick Roll</MenuItem>
               <MenuItem value="Barrel">Do a Barrel Roll</MenuItem>
               <MenuItem value="Just Do It">Just Do It</MenuItem>
             </Select>
-
-  
           </FormControl>
 
           <Form.Group
@@ -118,7 +113,7 @@ export default function FormSettings(props) {
             <Form.Label>Image URL</Form.Label>
             <Form.Control
               type="url"
-              placeholder="Default: Random Cat Img"
+              placeholder="Default: Cat Img"
               onChange={props.handleChangeImg}
               value={props.img}
             />

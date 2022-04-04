@@ -15,7 +15,6 @@ var twilio = require("twilio");
 const client = new twilio(accountSid, authToken);
 // const client = require('twilio')(accountSid, authToken);
 
-
 function App() {
   const [modalShow, setModalShow] = React.useState(false);
 
@@ -32,7 +31,7 @@ function App() {
   const [phone, setPhone] = React.useState("");
   const [msg, setMsg] = React.useState("");
   const [img, setImg] = React.useState("");
-  const [audio, setAudio] = React.useState("");
+  const [audio, setAudio] = React.useState("Rick Roll");
 
   function handleChangePhone(event) {
     setPhone(event.target.value);
@@ -51,130 +50,133 @@ function App() {
     console.log(audio);
   };
 
-  const makeText = () =>{
-    text(phone, msg, img)
+  const makeText = () => {
+    text(phone, msg, img);
+  };
+
+  const makeCall = () => {
+    call(phone, msg, audio);
+  };
+
+  const clearFields = () => {
+    setPhone("");
+    setMsg("");
+    setImg("");
+    setAudio("");
+  };
+
+  function call(phone, msg, audio) {
+    //cant sent spaces in https requests so replace spaces with +
+
+    if (msg == "") {
+      msg = "Hello from a friend!";
+    }
+
+    const newMsg = msg.replace(/ /g, "+");
+
+    let song = "";
+
+    if (audio === "Rick Roll") {
+      song = "http://demo.twilio.com/docs/classic.mp3";
+    }
+
+    if (audio === "Barrel") {
+      song = "https://melon-zebra-7147.twil.io/assets/BARRELROLL.mp3";
+    }
+
+    if (audio === "Just Do It") {
+      song = "https://melon-zebra-7147.twil.io/assets/DOIT.mp3";
+    }
+
+    client.calls
+      .create({
+        url: `https://handler.twilio.com/twiml/EH34f76e7cba60708c9daa84db1b77a062?MSG=${newMsg}&song=${song}`,
+        to: phone,
+        from: "+12269185064",
+      })
+      .then((message) => {
+        console.log(message.sid);
+        toggleModel1();
+        clearFields();
+      })
+      .catch((err) => {
+        console.log(err);
+        alert(err);
+      });
   }
 
-  const makeCall = () =>{
-    call(phone, msg, audio)
+  function text(phone, msg, img) {
+    if (img == "") {
+      img =
+        "https://dcist.com/wp-content/uploads/sites/3/2020/02/wilford_newsletter.jpg";
+    }
+
+    if (msg == "") {
+      msg = "Hello from a friend!";
+    }
+
+    client.messages
+      .create({
+        body: msg,
+        mediaUrl: img,
+        to: phone,
+        from: "+12269185064",
+      })
+      .then((message) => {
+        console.log(message.sid);
+        toggleModel2();
+        clearFields();
+      })
+      .catch((err) => {
+        console.log(err);
+        alert(err);
+      });
   }
-
-  const clearFields=()=>{
-    setPhone("")
-    setMsg("")
-    setImg("")
-    setAudio("")
-  }
-
-
-function call(phone, msg, audio) {
-  //cant sent spaces in https requests so replace spaces with +
-
-  if (msg == ""){
-    msg="Hello from a friend!"
-  }
-
-  const newMsg = msg.replace(/ /g, "+");
-
-  let song = "";
-
-  if (audio === "Rick Roll") {
-    song = "http://demo.twilio.com/docs/classic.mp3";
-  }
-
-  if (audio === "Barrel") {
-    song = "https://melon-zebra-7147.twil.io/assets/BARRELROLL.mp3";
-  }
-
-  if (audio === "Just Do It") {
-    song = "https://melon-zebra-7147.twil.io/assets/DOIT.mp3";
-  }
-
-  client.calls
-    .create({
-      url: `https://handler.twilio.com/twiml/EH34f76e7cba60708c9daa84db1b77a062?MSG=${newMsg}&song=${song}`,
-      to: phone,
-      from: "+12269185064",
-    })
-    .then((message) =>{
-      console.log(message.sid)
-      toggleModel1()
-      clearFields()
-    })
-    .catch(err=>{
-      console.log(err)
-      alert(err);
-
-    })
-}
-
-function text(phone, msg, img) {
-
-  if (img == ""){
-    img = "https://dcist.com/wp-content/uploads/sites/3/2020/02/wilford_newsletter.jpg"
-  }
-
-  if (msg == ""){
-    msg="Hello from a friend!"
-  }
-
-  client.messages
-    .create({
-      body: msg,
-      mediaUrl: img,
-      to: phone,
-      from: '+12269185064'
-    })
-    .then((message) =>{
-      console.log(message.sid)
-      toggleModel2()
-      clearFields()
-    })
-    .catch(err=>{
-      console.log(err)
-      alert(err);
-
-    })
-}
 
   return (
     <Container>
       <Row className="justify-content-md-center">
-        <h1 style={{marginBottom: "2em", marginTop:"1em"}}>ROBO CALL Prank Your Friends!!</h1>
+        <h1 style={{ marginBottom: "2em", marginTop: "1em" }}>
+          ROBO CALL Your Friends!!
+        </h1>
       </Row>
 
       <Row className="justify-content-md-center">
-        
-        <Col md> 
-        <img src="https://collectiondebtlawyer.com/wp-content/uploads/2015/08/Robot-calling.png" 
-        alt="Girl in a jacket" width="100%" height="100%" /> 
+        <Col md>
+          <img
+            src="https://collectiondebtlawyer.com/wp-content/uploads/2015/08/Robot-calling.png"
+            alt="Girl in a jacket"
+            width="100%"
+            height="100%"
+          />
         </Col>
-        
+
         <Col ls="auto">
-        <FormSettings
-          call={call}
-          text={text}
-          toggleModel1={toggleModel1}
-          toggleModel2={toggleModel2}
-          handleChangePhone={handleChangePhone}
-          handleChangeMsg={handleChangeMsg}
-          handleChangeImg={handleChangeImg}
-          handleChangeAudio={handleChangeAudio}
-          makeText={makeText}
-          makeCall={makeCall}
-          audio={audio}
-          phone={phone}
-          msg={msg}
-          img={img}
-        />
+          <FormSettings
+            call={call}
+            text={text}
+            toggleModel1={toggleModel1}
+            toggleModel2={toggleModel2}
+            handleChangePhone={handleChangePhone}
+            handleChangeMsg={handleChangeMsg}
+            handleChangeImg={handleChangeImg}
+            handleChangeAudio={handleChangeAudio}
+            makeText={makeText}
+            makeCall={makeCall}
+            audio={audio}
+            phone={phone}
+            msg={msg}
+            img={img}
+          />
         </Col>
 
-
-        
-        <Col md> 
-        <img src="https://thumbs.dreamstime.com/b/d-robot-has-mobile-phone-render-holding-66568146.jpg" 
-        alt="Girl in a jacket" width="100%" height="100%" /> 
-
+        <Col md>
+          <img
+            src="https://thumbs.dreamstime.com/b/d-robot-has-mobile-phone-render-holding-66568146.jpg"
+            alt="Girl in a jacket"
+            width="100%"
+            height="100%"
+          />
         </Col>
       </Row>
 
